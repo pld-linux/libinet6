@@ -12,6 +12,7 @@ Source0:	%{name}-%{snap}.tar.bz2
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-opt.patch
 Patch2:		%{name}-kill_warnings.patch
+Patch3:		%{name}-pid.patch
 URL:		http://www.linux-ipv6.org/
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -34,15 +35,17 @@ specjalnych przypadkach.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-
-%build
-%{__autoconf}
-%configure
-%{__make} OPT="%{rpmcflags}"
+%patch3 -p1
 
 rm -f include_glibc2[23]/bits/socket.h
 ln -sf /usr/include/bits/socket.h include_glibc22/bits
 ln -sf /usr/include/bits/socket.h include_glibc23/bits
+
+%build
+%{__autoconf}
+%configure
+%{__make} \
+	OPT="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
