@@ -11,6 +11,7 @@ Source0:	%{name}-%{snap}.tar.bz2
 # Source0-md5: b35a24121bb55b0e1f2425865885cda0
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-opt.patch
+Patch2:		%{name}-pid.patch
 URL:		http://www.linux-ipv6.org/
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,6 +33,7 @@ specjalnych przypadkach.
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__autoconf}
