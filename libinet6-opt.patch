@@ -1,12 +1,11 @@
-diff -Nur libinet6.orig/Makefile.in libinet6/Makefile.in
---- libinet6.orig/Makefile.in	Fri Apr 20 15:24:56 2001
-+++ libinet6/Makefile.in	Wed Oct 17 14:41:00 2001
-@@ -37,7 +37,7 @@
- LN_S = @LN_S@
+--- libinet6/Makefile.in.orig	Thu Jan  9 10:07:32 2003
++++ libinet6/Makefile.in	Fri Feb 28 11:40:06 2003
+@@ -38,7 +38,7 @@
  PERL = @perl@
  LORDER = @lorder@
--CFLAGS = -D_LIBC -D_USAGI_LIBINET6 -D_GNU_SOURCE -DCOMPAT_RFC2292 -Iinclude \
-+CFLAGS = $(OPT) -D_LIBC -D_USAGI_LIBINET6 -D_GNU_SOURCE -DCOMPAT_RFC2292 -Iinclude \
- 		-D__ss_family=ss_family -D__ss_len=ss_len
+ CFLAGS = -D_LIBC_REENTRANT -D_IO_MTSAFE_IO -D_USAGI -D_USAGI_LIBINET6=$(usagi_libc) -D_GNU_SOURCE -DCOMPAT_RFC2292 -Iinclude \
+-		-D__ss_family=ss_family -D__ss_len=ss_len
++		-D__ss_family=ss_family -D__ss_len=ss_len $(OPT)
+ DEFS = @DEFS@
  
  usagi_libc=@usagi_libc@
