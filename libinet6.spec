@@ -8,6 +8,7 @@ License:	LGPL
 Group:		Libraries
 # from		cvs -d :pserver:anoncvs:anoncvs@anoncvs.linux-ipv6.org:/cvsroot/usagi usagi/usagi/libinet6
 Source0:	%{name}-%{snap}.tar.bz2
+# Source0-md5: b35a24121bb55b0e1f2425865885cda0
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-opt.patch
 URL:		http://www.linux-ipv6.org/
