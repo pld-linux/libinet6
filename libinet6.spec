@@ -6,13 +6,6 @@ Version:	0.%{snap}
 Release:	3
 License:	LGPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	cvs://:pserver:anoncvs@anoncvs.linux-ipv6.org:/cvsroot/usagi/libc/%{name}-%{snap}.tar.gz
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-opt.patch
