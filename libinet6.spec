@@ -3,7 +3,7 @@ Summary:	Library for platforms without IPv6 support in base libc
 Summary(pl):	Biblioteka dla platform bez obs≥ugi IPv6 w podstawowej bibliotece
 Name:		libinet6
 Version:	0.%{snap}
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -16,6 +16,7 @@ Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	cvs://:pserver:anoncvs@anoncvs.linux-ipv6.org:/cvsroot/usagi/libc/%{name}-%{snap}.tar.gz
 Patch0:		%{name}-acfix.patch
 Patch1:		%{name}-opt.patch
+Patch2:		%{name}-nosegv.patch
 URL:		http://www.linux-ipv6.org/
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,11 +38,15 @@ specjalnych przypadkach.
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 autoconf
 %configure
 %{__make} OPT="%{rpmcflags}"
+
+rm -f include_glibc22/bits/socket.h
+ln -sf /usr/include/bits/socket.h include_glibc22/bits
 
 %install
 rm -rf $RPM_BUILD_ROOT
