@@ -1,0 +1,105 @@
+diff -durN -x '*~' -x '*.orig' libinet6.orig/getaddrinfo.c libinet6/getaddrinfo.c
+--- libinet6.orig/getaddrinfo.c	2003-01-07 11:22:52.000000000 +0100
++++ libinet6/getaddrinfo.c	2004-02-02 09:58:16.915992515 +0100
+@@ -48,6 +48,8 @@
+ #include "libc-compat.h"
+ #endif
+ 
++#include "prototypes.h"
++
+ #include <errno.h>
+ #include <netdb.h>
+ #include <resolv.h>
+diff -durN -x '*~' -x '*.orig' libinet6.orig/getnameinfo.c libinet6/getnameinfo.c
+--- libinet6.orig/getnameinfo.c	2002-05-15 07:45:20.000000000 +0200
++++ libinet6/getnameinfo.c	2004-02-02 09:58:16.916992271 +0100
+@@ -44,10 +44,6 @@
+ 
+ /* This software is Copyright 1996 by Craig Metz, All Rights Reserved.  */
+ 
+-#ifdef _USAGI_LIBINET6
+-#include "libc-compat.h"
+-#endif
+-
+ #include <alloca.h>
+ #include <errno.h>
+ #include <netdb.h>
+@@ -68,6 +64,9 @@
+ # define min(x,y) (((x) > (y)) ? (y) : (x))
+ #endif /* min */
+ 
++#ifdef _USAGI_LIBINET6
++#include "libc-compat.h"
++#endif
+ 
+ static char *
+ internal_function
+diff -durN -x '*~' -x '*.orig' libinet6.orig/ifaddrs.c libinet6/ifaddrs.c
+--- libinet6.orig/ifaddrs.c	2002-12-08 09:22:19.000000000 +0100
++++ libinet6/ifaddrs.c	2004-02-02 09:58:16.916992271 +0100
+@@ -43,6 +43,7 @@
+ #ifdef _USAGI_LIBINET6
+ #include "libc-compat.h"
+ #endif
++#include "prototypes.h"
+ 
+ /* ====================================================================== */
+ struct nlmsg_list
+diff -durN -x '*~' -x '*.orig' libinet6.orig/ifnames.c libinet6/ifnames.c
+--- libinet6.orig/ifnames.c	2002-12-08 09:22:19.000000000 +0100
++++ libinet6/ifnames.c	2004-02-02 09:58:16.917992028 +0100
+@@ -43,6 +43,7 @@
+ #ifdef _USAGI_LIBINET6
+ #include "libc-compat.h"
+ #endif
++#include "prototypes.h"
+ 
+ /* ====================================================================== */
+ struct nlmsg_list
+diff -durN -x '*~' -x '*.orig' libinet6.orig/libc-compat.h libinet6/libc-compat.h
+--- libinet6.orig/libc-compat.h	2003-01-11 16:02:45.000000000 +0100
++++ libinet6/libc-compat.h	2004-02-02 09:58:16.917992028 +0100
+@@ -54,9 +54,19 @@
+ #define __sleep			sleep
+ #define __snprintf		snprintf
+ #define __socket		socket
++#ifndef __strdup
+ #define __strdup		strdup
++#endif
+ #define __strnlen		strnlen
+ #define __sysconf		sysconf
++#define __getpid		getpid
++#define __fcntl			fcntl
++#define __connect		connect
++#define __close			close
++#define __write			write
++#define __read			read
++#define __poll			poll
++#define __open			open
+ 
+ extern int __gen_tempname (char *, int);
+ #define __GT_FILE	0
+diff -durN -x '*~' -x '*.orig' libinet6.orig/prototypes.h libinet6/prototypes.h
+--- libinet6.orig/prototypes.h	1970-01-01 01:00:00.000000000 +0100
++++ libinet6/prototypes.h	2004-02-02 09:58:16.917992028 +0100
+@@ -0,0 +1,7 @@
++#ifndef prototypes_h
++#define prototypes_h
++
++#include <sys/types.h>
++int __path_search (char *tmpl, size_t tmpl_len, const char *dir, const char *pfx, int try_tmpdir);
++
++#endif
+diff -durN -x '*~' -x '*.orig' libinet6.orig/rexec.c libinet6/rexec.c
+--- libinet6.orig/rexec.c	2002-05-15 07:45:20.000000000 +0200
++++ libinet6/rexec.c	2004-02-02 09:59:06.258986680 +0100
+@@ -51,6 +51,9 @@
+ int	rexecoptions;
+ char	ahostbuf[NI_MAXHOST];
+ 
++/* where the hell this comes from??? */
++int ruserpass(const char *, const char **name, const char **pass);
++
+ int
+ rexec_af(ahost, rport, name, pass, cmd, fd2p, af)
+ 	char **ahost;
