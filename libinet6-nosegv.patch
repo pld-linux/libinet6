@@ -1,0 +1,16 @@
+diff -Nur libinet6.orig/ifaddrs.c libinet6/ifaddrs.c
+--- libinet6.orig/ifaddrs.c	Fri Apr 20 15:24:56 2001
++++ libinet6/ifaddrs.c	Thu Oct 18 15:05:39 2001
+@@ -233,10 +233,11 @@
+   pid_t pid = getpid();
+   for (;;){
+     void *newbuff = realloc(buff, bufsize);
+-    if (newbuff == NULL){
++    if (newbuff == NULL || !bufsize){
+       if (buff){
+ 	int saved_errno = errno;
+ 	free(buff);
++	buff=NULL;
+ 	__set_errno(saved_errno);
+       }
+       result = -1;
