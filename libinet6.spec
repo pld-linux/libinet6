@@ -1,16 +1,16 @@
 %define snap	20010420
-Summary:	Library for platforms without IPv6 support in base libc.
-Summary(pl):	Bibliteka dla platform bez obs³ugi IPv6 w podstawowej bibliotece.
+Summary:	Library for platforms without IPv6 support in base libc
+Summary(pl):	Bibliteka dla platform bez obs³ugi IPv6 w podstawowej bibliotece
 Name:		libinet6
 Version:	0.%{snap}
 Release:	1
 License:	LGPL
-Source0:	cvs://:pserver:anoncvs@anoncvs.linux-ipv6.org:/cvsroot/usagi/libc/%{name}-%{snap}.tar.gz
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Source0:	cvs://:pserver:anoncvs@anoncvs.linux-ipv6.org:/cvsroot/usagi/libc/%{name}-%{snap}.tar.gz
 URL:		http://www.linux-ipv6.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
