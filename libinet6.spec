@@ -34,7 +34,7 @@ specjalnych przypadkach.
 %patch2 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure
 %{__make} OPT="%{rpmcflags}"
 
