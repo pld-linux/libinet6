@@ -25,7 +25,7 @@ glibc library, so you need this only in special cases.
 
 %description -l pl
 Pakiet dostarcza funkcje IPv6 takie jak getaddrinfo(), getnameinfo(),
-getifaddrs(), r-komendy itp. Wiêkszo¶c tych funkcji znajduje siê ju¿ w
+getifaddrs(), r-komendy itp. Wiêkszo¶æ tych funkcji znajduje siê ju¿ w
 bazowej bibliotece glibc, wiêc potrzebujesz tego pakietu tylko w
 specjalnych przypadkach.
 
