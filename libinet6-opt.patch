@@ -1,0 +1,152 @@
+diff -Nur libinet6.orig/Makefile.in libinet6/Makefile.in
+--- libinet6.orig/Makefile.in	Fri Apr 20 15:24:56 2001
++++ libinet6/Makefile.in	Wed Oct 17 14:41:00 2001
+@@ -37,7 +37,7 @@
+ LN_S = @LN_S@
+ PERL = @perl@
+ LORDER = @lorder@
+-CFLAGS = -D_LIBC -D_USAGI_LIBINET6 -D_GNU_SOURCE -DCOMPAT_RFC2292 -Iinclude \
++CFLAGS = $(OPT) -D_LIBC -D_USAGI_LIBINET6 -D_GNU_SOURCE -DCOMPAT_RFC2292 -Iinclude \
+ 		-D__ss_family=ss_family -D__ss_len=ss_len
+ 
+ usagi_libc=@usagi_libc@
+diff -Nur libinet6.orig/Makefile.in~ libinet6/Makefile.in~
+--- libinet6.orig/Makefile.in~	Thu Jan  1 01:00:00 1970
++++ libinet6/Makefile.in~	Fri Apr 20 15:24:56 2001
+@@ -0,0 +1,136 @@
++# $USAGI: Makefile.in,v 1.24 2001/03/05 07:39:01 yoshfuji Exp $
++
++# Copyright (C) 2000-2001 USAGI/WIDE Project.
++# All rights reserved.
++# 
++# Redistribution and use in source and binary forms, with or without
++# modification, are permitted provided that the following conditions
++# are met:
++# 1. Redistributions of source code must retain the above copyright
++#    notice, this list of conditions and the following disclaimer.
++# 2. Redistributions in binary form must reproduce the above copyright
++#    notice, this list of conditions and the following disclaimer in the
++#    documentation and/or other materials provided with the distribution.
++# 3. Neither the name of the project nor the names of its contributors
++#    may be used to endorse or promote products derived from this software
++#    without specific prior written permission.
++# 
++# THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
++# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
++# ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
++# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
++# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
++# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
++# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
++# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
++# SUCH DAMAGE.
++
++CC = @CC@
++INSTALL = @INSTALL@
++INSTALL_PROGRAM = @INSTALL_PROGRAM@
++INSTALL_SCRIPT = @INSTALL_SCRIPT@
++INSTALL_DATA = @INSTALL_DATA@
++INSTALL_LIBRARY = @INSTALL_LIBRARY@
++INSTALL_DIR = @INSTALL_DIR@
++LN_S = @LN_S@
++PERL = @perl@
++LORDER = @lorder@
++CFLAGS = -D_LIBC -D_USAGI_LIBINET6 -D_GNU_SOURCE -DCOMPAT_RFC2292 -Iinclude \
++		-D__ss_family=ss_family -D__ss_len=ss_len
++
++usagi_libc=@usagi_libc@
++
++CFLAGS += -Iinclude_glibc$(usagi_libc)
++
++prefix = @prefix@
++exec_prefix = @exec_prefix@
++includedir = @includedir@
++libdir = @libdir@
++mandir = @mandir@
++
++MODE=0644
++
++A_LIBS = libinet6.a libinet6_p.a
++#S_LIBS = libinet6.so libinet6_p.so 
++LIBS = $(A_LIBS) $(S_LIBS)
++LIBOBJS = tempname.o
++LIBPOBJS = tempname.po
++OBJS = usagi.o \
++	getaddrinfo.o getnameinfo.o \
++	ip6opt.o rthdr.o \
++	ifaddrs.o ifnames.o \
++	cmsg_nxthdr.o \
++	rcmd.o rexec.o \
++	sa_len.o
++POBJS = usagi.po \
++	getaddrinfo.po getnameinfo.po \
++	ip6opt.po rthdr.po \
++	ifaddrs.po ifnames.po \
++	cmsg_nxthdr.po \
++	rcmd.po rexec.po \
++	sa_len.po
++
++.SUFFIXES: .o .po
++.c.o:
++	$(CC) $(CFLAGS) -o $@ -c $<
++.c.po:
++	$(CC) -pg $(CFLAGS) -o $@ -c $<
++
++.PHONY: all includes install install-includes clean distclean \
++	include_glibc$(usagi_libc) \
++	include_glibc$(usagi_libc)_includes \
++	include_glibc$(usagi_libc)_install \
++	include_glibc$(usagi_libc)_install-includes \
++	include_glibc$(usagi_libc)_clean \
++	include_glibc$(usagi_libc)_distclean
++
++all: includes include_glibc$(usagi_libc) $(LIBS)
++includes: include_glibc$(usagi_libc)_includes
++	$(MAKE) -C include_glibc$(usagi_libc) includes
++	-if [ -d include ]; then	\
++		rm -fr include;		\
++	fi
++	$(LN_S) -f include_glibc$(usagi_libc) include
++install: all include_glibc$(usagi_libc)_install
++	$(INSTALL_DIR) $(libdir)
++	$(INSTALL_LIBRARY) $(LIBS) $(libdir)
++install-includes: include_glibc$(usagi_libc)_install-includes
++clean: include_glibc$(usagi_libc)_clean
++	-rm -f $(LIBS) $(OBJS) $(POBJS) $(LIBOBJS) $(LIBPOBJS)
++distclean: clean include_glibc$(usagi_libc)_distclean
++	-rm -f include
++	-rm -f *.so *.a *.o *.po
++	-rm -f config.status config.cache config.log config.h Makefile
++
++include_glibc$(usagi_libc):
++	$(MAKE) -C include_glibc$(usagi_libc)
++include_glibc$(usagi_libc)_includes:
++	$(MAKE) -C include_glibc$(usagi_libc) includes
++include_glibc$(usagi_libc)_install:
++	$(MAKE) -C include_glibc$(usagi_libc) install
++include_glibc$(usagi_libc)_install-includes:
++	$(MAKE) -C include_glibc$(usagi_libc) install-includes
++include_glibc$(usagi_libc)_clean:
++	$(MAKE) -C include_glibc$(usagi_libc) clean
++include_glibc$(usagi_libc)_distclean:
++	$(MAKE) -C include_glibc$(usagi_libc) distclean
++
++libinet6.so: $(OBJS) $(LIBOBJS)
++	$(CC) -shared -o $@ `$(LORDER) $^ | tsort`
++libinet6_p.so: $(POBJS) $(LIBPOBJS)
++	$(CC) -shared -o $@ `$(LORDER) $^ | tsort`
++libinet6.a: $(OBJS) $(LIBOBJS)
++	$(AR) r $@ $^
++libinet6_p.a: $(POBJS) $(LIBPOBJS)
++	$(AR) r $@ $^
++
++tempname.o: tempname.c libc-compat.h
++getaddrinfo.o: getaddrinfo.c libc-compat.h
++getnameinfo.o: getnameinfo.c libc-compat.h
++ip6opt.o: ip6opt.c libc-compat.h
++rthdr.o: rthdr.c libc-compat.h
++ifaddrs.o: ifaddrs.c libc-compat.h
++ifnames.o: ifnames.c libc-compat.h
++
