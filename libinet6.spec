@@ -48,7 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 	install \
 	install-includes \
 	oldincludedir=$RPM_BUILD_ROOT%{_includedir}
-	
+
 gzip -9nf README*
 
 %clean
