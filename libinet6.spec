@@ -49,13 +49,11 @@ rm -rf $RPM_BUILD_ROOT
 	install-includes \
 	oldincludedir=$RPM_BUILD_ROOT%{_includedir}
 
-gzip -9nf README*
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README*
 %{_includedir}
 %{_libdir}/*.a
