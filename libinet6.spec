@@ -3,7 +3,7 @@ Summary:	Library for platforms without IPv6 support in base libc
 Summary(pl):	Biblioteka dla platform bez obs³ugi IPv6 w podstawowej bibliotece
 Name:		libinet6
 Version:	0.%{snap}
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 # from		cvs -d :pserver:anoncvs:anoncvs@anoncvs.linux-ipv6.org:/cvsroot/usagi usagi/usagi/libinet6
