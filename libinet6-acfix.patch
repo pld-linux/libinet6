@@ -1,0 +1,21 @@
+diff -Nur libinet6.orig/configure.in libinet6/configure.in
+--- libinet6.orig/configure.in	Fri Apr 20 15:24:56 2001
++++ libinet6/configure.in	Wed Oct 17 14:25:18 2001
+@@ -52,7 +52,7 @@
+ dnl AC_CHECK_HEADERS(fcntl.h malloc.h sys/time.h unistd.h)
+ 
+ AC_MSG_CHECKING([for glibc version])
+-AC_EGREP_CPP(%%%yes%%%, [dnl
++AC_EGREP_CPP(%%%yes%%%, [
+ #include <features.h>
+ #if defined(__GLIBC__) && __GLIBC__ == 2 && __GLIBC_MINOR__ == 1
+ %%%yes%%%
+@@ -61,7 +61,7 @@
+ 	glibc_version=2.1
+ 	usagi_libc=21
+ ],[
+-	AC_EGREP_CPP(%%%yes%%%, [dnl
++	AC_EGREP_CPP(%%%yes%%%, [
+ #include <features.h>
+ #if defined(__GLIBC__) && __GLIBC__ == 2 && __GLIBC_MINOR__ == 2
+ %%%yes%%%
