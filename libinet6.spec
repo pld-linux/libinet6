@@ -1,6 +1,6 @@
 %define snap	20030228
 Summary:	Library for platforms without IPv6 support in base libc
-Summary(pl):	Biblioteka dla platform bez obs³ugi IPv6 w podstawowej bibliotece
+Summary(pl.UTF-8):   Biblioteka dla platform bez obsÅ‚ugi IPv6 w podstawowej bibliotece
 Name:		libinet6
 Version:	0.%{snap}
 Release:	5
@@ -24,10 +24,10 @@ Package contains IPv6 functions such as getaddrinfo(), getnameinfo(),
 getifaddrs(), r-commands etc. Most of these functions are in base
 glibc library, so you need this only in special cases.
 
-%description -l pl
+%description -l pl.UTF-8
 Pakiet dostarcza funkcje IPv6 takie jak getaddrinfo(), getnameinfo(),
-getifaddrs(), r-komendy itp. Wiêkszo¶æ tych funkcji znajduje siê ju¿ w
-bazowej bibliotece glibc, wiêc potrzebujesz tego pakietu tylko w
+getifaddrs(), r-komendy itp. WiÄ™kszoÅ›Ä‡ tych funkcji znajduje siÄ™ juÅ¼ w
+bazowej bibliotece glibc, wiÄ™c potrzebujesz tego pakietu tylko w
 specjalnych przypadkach.
 
 %prep
