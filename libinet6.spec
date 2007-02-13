@@ -1,6 +1,6 @@
 %define snap	20030228
 Summary:	Library for platforms without IPv6 support in base libc
-Summary(pl.UTF-8):   Biblioteka dla platform bez obsługi IPv6 w podstawowej bibliotece
+Summary(pl.UTF-8):	Biblioteka dla platform bez obsługi IPv6 w podstawowej bibliotece
 Name:		libinet6
 Version:	0.%{snap}
 Release:	5
